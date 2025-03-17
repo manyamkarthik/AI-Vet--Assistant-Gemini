@@ -2,7 +2,7 @@ import os
 import streamlit as st
 import google.generativeai as genai
 from PIL import Image
-from dotenv import load_dotenv, find_dotenv
+
 
 def chat_func(prompt, img):
     model = genai.GenerativeModel('gemini-1.5-flash')
@@ -20,8 +20,9 @@ def convert_image_to_pil(st_image):
     return pil_image
 
 if __name__ == "__main__":
-    load_dotenv(find_dotenv(), override=True)
-    genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+    
+    GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
+    genai.configure(api_key=GOOGLE_API_KEY)
 
     st.image('banner.png') # Replace with a vet-themed banner if you have one
     st.title('Veterinary AI Assistant')
